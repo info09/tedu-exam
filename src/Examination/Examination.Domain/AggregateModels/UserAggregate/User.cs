@@ -1,7 +1,7 @@
 ﻿using Examination.Domain.SeedWork;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace Examination.Domain.AggregateModels.UserAgregate
+namespace Examination.Domain.AggregateModels.UserAggregate
 {
     public class User : Entity, IAggregateRoot
     {

@@ -1,4 +1,4 @@
-﻿using Examination.Domain.AggregateModels.QuestionAgregate;
+﻿using Examination.Domain.AggregateModels.QuestionAggregate;
 using Examination.Domain.SeedWork;
 using Examination.Dtos.Enums;
 using MongoDB.Bson.Serialization.Attributes;
@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Examination.Domain.AggregateModels.ExamAgregate
+namespace Examination.Domain.AggregateModels.ExamAggregate
 {
     public class Exam : Entity, IAggregateRoot
     {
@@ -45,15 +45,15 @@ namespace Examination.Domain.AggregateModels.ExamAgregate
 
         public Exam(string name, string shortDesc, string content, int numberOfQuestions, Level level, DateTime dateCreated, string ownerUserId, int numberOfQuestionCorrectForPass, bool isTimeRestricted)
         {
-            this.Name = name;
-            this.ShortDesc = shortDesc;
-            this.Content = content;
-            this.NumberOfQuestions = numberOfQuestions;
-            this.Level = level;
-            this.DateCreated = dateCreated;
-            this.OwnerUserId = ownerUserId;
-            this.NumberOfQuestionCorrectForPass = numberOfQuestionCorrectForPass;
-            this.IsTimeRestricted = isTimeRestricted;
+            Name = name;
+            ShortDesc = shortDesc;
+            Content = content;
+            NumberOfQuestions = numberOfQuestions;
+            Level = level;
+            DateCreated = dateCreated;
+            OwnerUserId = ownerUserId;
+            NumberOfQuestionCorrectForPass = numberOfQuestionCorrectForPass;
+            IsTimeRestricted = isTimeRestricted;
 
         }
 

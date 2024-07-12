@@ -1,6 +1,6 @@
 ﻿using Examination.Domain.SeedWork;
 
-namespace Examination.Domain.AggregateModels.QuestionAgregate
+namespace Examination.Domain.AggregateModels.QuestionAggregate
 {
     public interface IQuestionRepository : IRepositoryBase<Question>
     {

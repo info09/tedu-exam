@@ -1,7 +1,7 @@
 ﻿using Examination.Domain.SeedWork;
 using System.Threading.Tasks;
 
-namespace Examination.Domain.AggregateModels.UserAgregate
+namespace Examination.Domain.AggregateModels.UserAggregate
 {
     public interface IUserRepository : IRepositoryBase<User>
     {

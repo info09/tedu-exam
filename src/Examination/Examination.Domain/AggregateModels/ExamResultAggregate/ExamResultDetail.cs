@@ -1,17 +1,17 @@
-﻿using Examination.Domain.AggregateModels.QuestionAgregate;
+﻿using Examination.Domain.AggregateModels.QuestionAggregate;
 using Examination.Domain.SeedWork;
 using MongoDB.Bson.Serialization.Attributes;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Examination.Domain.AggregateModels.ExamResultAgregate
+namespace Examination.Domain.AggregateModels.ExamResultAggregate
 {
     public class ExamResultDetail : Entity
     {
         public ExamResultDetail(Question question, IEnumerable<Answer> selectedAnswers, string explain)
         {
             (Question, SelectedAnswers) = (question, selectedAnswers);
-            IsCorrect = this.SelectedAnswers.Select(x => x.Id).Except(question.Answers.Select(x => x.Id)).ToList().Count == 0;
+            IsCorrect = SelectedAnswers.Select(x => x.Id).Except(question.Answers.Select(x => x.Id)).ToList().Count == 0;
         }
 
         [BsonElement("question")]

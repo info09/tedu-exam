@@ -1,4 +1,4 @@
-﻿using Examination.Domain.AggregateModels.ExamResultAgregate;
+﻿using Examination.Domain.AggregateModels.ExamResultAggregate;
 using MediatR;
 using System;
 using System.Threading;

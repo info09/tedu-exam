@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Examination.Domain.AggregateModels.ExamAgregate;
+using Examination.Domain.AggregateModels.ExamAggregate;
 using Examination.Dtos;
 using MediatR;
 using MongoDB.Driver;

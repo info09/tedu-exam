@@ -1,7 +1,7 @@
 ﻿using Examination.Domain.SeedWork;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace Examination.Domain.AggregateModels.QuestionAgregate
+namespace Examination.Domain.AggregateModels.QuestionAggregate
 {
     public class Answer : Entity
     {

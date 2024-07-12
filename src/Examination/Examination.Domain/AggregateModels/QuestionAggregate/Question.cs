@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Examination.Domain.AggregateModels.QuestionAgregate
+namespace Examination.Domain.AggregateModels.QuestionAggregate
 {
     public class Question : Entity, IAggregateRoot
     {

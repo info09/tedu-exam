@@ -1,4 +1,4 @@
-﻿using Examination.Domain.AggregateModels.UserAgregate;
+﻿using Examination.Domain.AggregateModels.UserAggregate;
 using Examination.Domain.Events;
 using MediatR;
 using System.Threading;

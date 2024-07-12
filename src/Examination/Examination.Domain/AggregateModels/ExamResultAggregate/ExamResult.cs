@@ -4,7 +4,7 @@ using MongoDB.Bson.Serialization.Attributes;
 using System;
 using System.Collections.Generic;
 
-namespace Examination.Domain.AggregateModels.ExamResultAgregate
+namespace Examination.Domain.AggregateModels.ExamResultAggregate
 {
     public class ExamResult : Entity, IAggregateRoot
     {
@@ -40,7 +40,7 @@ namespace Examination.Domain.AggregateModels.ExamResultAgregate
 
         public void StartExam(string firstName, string lastName)
         {
-            this.AddDomainEvent(new ExamStartedDomainEvent(UserId, firstName, lastName));
+            AddDomainEvent(new ExamStartedDomainEvent(UserId, firstName, lastName));
         }
 
         public void SetUserChoices(List<ExamResultDetail> examResultDetails)
