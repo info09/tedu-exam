@@ -1,26 +1,33 @@
 ﻿using Examination.Application.Queries.V1.GetHomeExamList;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 
-namespace Examination.API.Controllers
+namespace Examination.API.Controllers.V2
 {
-    [Route("api/[controller]")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
+    [ApiVersion("2.0")]
     public class ExamsController : ControllerBase
     {
         private readonly IMediator _mediator;
+        private readonly ILogger<ExamsController> _logger;
 
-        public ExamsController(IMediator mediator)
+        public ExamsController(IMediator mediator, ILogger<ExamsController> logger)
         {
             _mediator = mediator;
+            _logger = logger;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetExamList()
         {
+            _logger.LogInformation("BEGIN: GetExamList");
             var query = new GetHomeExamListQuery();
             var queryHandler = await _mediator.Send(query);
+
+            _logger.LogInformation("END: GetExamList");
             return Ok(queryHandler);
         }
     }
