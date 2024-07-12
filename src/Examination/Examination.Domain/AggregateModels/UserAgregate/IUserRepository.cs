@@ -1,8 +1,9 @@
-﻿using System.Threading.Tasks;
+﻿using Examination.Domain.SeedWork;
+using System.Threading.Tasks;
 
 namespace Examination.Domain.AggregateModels.UserAgregate
 {
-    public interface IUserRepository
+    public interface IUserRepository : IRepositoryBase<User>
     {
         Task<User> GetUserByIdAsync(string externalId);
     }
