@@ -1,6 +1,8 @@
 ﻿using Examination.Domain.AggregateModels.QuestionAgregate;
 using Examination.Domain.SeedWork;
 using MongoDB.Bson.Serialization.Attributes;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Examination.Domain.AggregateModels.ExamResultAgregate
 {

@@ -1,3 +1,4 @@
+using Examination.Infrastructure.SeedWork;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;

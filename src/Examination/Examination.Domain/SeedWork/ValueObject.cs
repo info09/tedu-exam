@@ -1,4 +1,7 @@
-﻿namespace Examination.Domain.SeedWork
+﻿using System.Collections.Generic;
+using System.Linq;
+
+namespace Examination.Domain.SeedWork
 {
     public abstract class ValueObject
     {

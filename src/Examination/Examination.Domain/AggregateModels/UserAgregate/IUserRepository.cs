@@ -1,4 +1,6 @@
-﻿namespace Examination.Domain.AggregateModels.UserAgregate
+﻿using System.Threading.Tasks;
+
+namespace Examination.Domain.AggregateModels.UserAgregate
 {
     public interface IUserRepository
     {

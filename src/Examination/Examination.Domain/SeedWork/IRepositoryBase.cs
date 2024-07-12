@@ -1,4 +1,7 @@
-﻿namespace Examination.Domain.SeedWork
+﻿using System.Threading;
+using System.Threading.Tasks;
+
+namespace Examination.Domain.SeedWork
 {
     public interface IRepositoryBase<T> where T : IAggregateRoot
     {

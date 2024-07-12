@@ -1,10 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+	<PropertyGroup>
+	<TargetFramework>net5.0</TargetFramework>
+</PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="5.0.0" />
@@ -16,5 +14,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Examination.Domain\Examination.Domain.csproj" />
   </ItemGroup>
+
 
 </Project>
