@@ -1,3 +1,4 @@
+using Examination.API.Filters;
 using Examination.Application.Commands.V1.StartExam;
 using Examination.Application.Mapping;
 using Examination.Domain.AggregateModels.ExamAggregate;
@@ -18,6 +19,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using MongoDB.Driver;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mime;
 using System.Text.Json;
@@ -51,10 +53,15 @@ namespace Examination.API
                 options.ReportApiVersions = true;
             });
             services.AddVersionedApiExplorer(options =>
-            {
-                options.GroupNameFormat = "'v'VVV";
-                options.SubstituteApiVersionInUrl = true;
-            });
+                           {
+                               // add the versioned api explorer, which also adds IApiVersionDescriptionProvider service
+                               // note: the specified format code will format the version as "'v'major[.minor][-status]"
+                               options.GroupNameFormat = "'v'VVV";
+
+                               // note: this option is only necessary when versioning by url segment. the SubstitutionFormat
+                               // can also be used to control the format of the API version in route templates
+                               options.SubstituteApiVersionInUrl = true;
+                           });
 
             services.AddScoped(c => c.GetService<IMongoClient>()?.StartSession());
             services.AddAutoMapper(cfg => { cfg.AddProfile(new MappingProfile()); });
@@ -74,7 +81,49 @@ namespace Examination.API
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Examination.API V1", Version = "v1" });
                 c.SwaggerDoc("v2", new OpenApiInfo { Title = "Examination.API V2", Version = "v2" });
+
+                c.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
+                {
+                    Type = SecuritySchemeType.OAuth2,
+                    Flows = new OpenApiOAuthFlows()
+                    {
+                        Implicit = new OpenApiOAuthFlow()
+                        {
+                            AuthorizationUrl = new Uri($"{Configuration.GetValue<string>("IdentityUrl")}/connect/authorize"),
+                            TokenUrl = new Uri($"{Configuration.GetValue<string>("IdentityUrl")}/connect/token"),
+                            Scopes = new Dictionary<string, string>()
+                            {
+                                {"full_access", "Full Access"},
+                            }
+                        }
+                    }
+                });
+                c.OperationFilter<AuthorizeCheckOperationFilter>();
+
             });
+
+            var identityUrl = Configuration.GetValue<string>("IdentityUrl");
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults
+                    .AuthenticationScheme;
+                options.DefaultChallengeScheme = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults
+                    .AuthenticationScheme;
+            }).AddJwtBearer(options =>
+            {
+                options.Authority = identityUrl;
+                options.RequireHttpsMetadata = false;
+                options.Audience = "exam_api";
+                options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters()
+                {
+                    ValidateIssuerSigningKey = true,
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            });
+
+
+
             services.Configure<ExamSettings>(Configuration);
 
             //Health check
@@ -118,7 +167,6 @@ namespace Examination.API
             app.UseRouting();
             app.UseCors("CorsPolicy");
             app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapHealthChecks("/hc", new HealthCheckOptions()
